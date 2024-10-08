@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contacto - Club de Ciencias San Juan">
+	<h1 class="text-4xl font-bold text-center mb-8">Contacto</h1>
+	<div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+		<p class="mb-4">¿Tienes alguna pregunta o quieres unirte a nuestro club? ¡Contáctanos!</p>
+		<form class="space-y-4">
+			<div>
+				<label for="nombre" class="block mb-1">Nombre:</label>
+				<input type="text" id="nombre" name="nombre" required class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
+			</div>
+			<div>
+				<label for="email" class="block mb-1">Correo Electrónico:</label>
+				<input type="email" id="email" name="email" required class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
+			</div>
+			<div>
+				<label for="mensaje" class="block mb-1">Mensaje:</label>
+				<textarea id="mensaje" name="mensaje" required class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" rows="4"></textarea>
+			</div>
+			<button type="submit" class="w-full bg-space-accent text-white p-2 rounded hover:bg-opacity-90 transition-colors">Enviar</button>
+		</form>
+	</div>
+</Layout>

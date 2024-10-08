@@ -1,0 +1,128 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Club de Ciencias San Juan" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+		<ViewTransitions />
+		<title>{title}</title>
+	</head>
+	<body class="bg-space-light dark:bg-space-dark text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
+		<div id="stars-container" class="fixed inset-0 pointer-events-none"></div>
+		<header class="fixed top-0 left-0 right-0 bg-space-accent text-white p-4 z-10">
+			<nav class="container mx-auto">
+				<ul class="flex justify-center space-x-6">
+					<li><a href="/" class="hover:text-gray-300 transition-colors">Inicio</a></li>
+					<li><a href="/blog" class="hover:text-gray-300 transition-colors">Blog</a></li>
+					<li><a href="/proyectos" class="hover:text-gray-300 transition-colors">Proyectos</a></li>
+					<li><a href="/sobre-nosotros" class="hover:text-gray-300 transition-colors">Sobre Nosotros</a></li>
+					<li><a href="/contacto" class="hover:text-gray-300 transition-colors">Contacto</a></li>
+					<li><a href="/miembros" class="hover:text-gray-300 transition-colors">Miembros</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main class="flex-grow container mx-auto px-4 py-8 mt-16">
+			<slot />
+		</main>
+		<footer class="bg-space-accent text-white p-4 mt-8">
+			<div class="container mx-auto text-center">
+				<p>&copy; 2023 Club de Ciencias San Juan. Todos los derechos reservados.</p>
+			</div>
+		</footer>
+		<button id="darkModeToggle" class="fixed bottom-4 right-4 bg-space-accent text-white p-2 rounded-full z-20">
+			🌓
+		</button>
+	</body>
+</html>
+
+<script>
+	function setDarkMode(isDark) {
+		if (isDark) {
+			document.documentElement.classList.add('dark');
+			localStorage.setItem('darkMode', 'true');
+		} else {
+			document.documentElement.classList.remove('dark');
+			localStorage.setItem('darkMode', 'false');
+		}
+	}
+
+	function toggleDarkMode() {
+		const isDark = document.documentElement.classList.toggle('dark');
+		setDarkMode(isDark);
+	}
+
+	// Initialize dark mode
+	const darkModeToggle = document.getElementById('darkModeToggle');
+	if (darkModeToggle) {
+		darkModeToggle.addEventListener('click', toggleDarkMode);
+	}
+
+	// Check for saved dark mode preference or use dark mode as default
+	const darkModeSaved = localStorage.getItem('darkMode');
+	setDarkMode(darkModeSaved !== null ? darkModeSaved === 'true' : true);
+
+	// Animated stars background
+	function createStar() {
+		const star = document.createElement('div');
+		star.className = 'star';
+		star.style.left = `${Math.random() * 100}%`;
+		star.style.top = `${Math.random() * 100}%`;
+		star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+		star.style.animationDelay = `${Math.random() * 3}s`;
+		return star;
+	}
+
+	function initStars() {
+		const container = document.getElementById('stars-container');
+		if (container) {
+			container.innerHTML = ''; // Clear existing stars
+			for (let i = 0; i < 100; i++) {
+				container.appendChild(createStar());
+			}
+		}
+	}
+
+	// Initialize stars on page load and after each navigation
+	document.addEventListener('astro:page-load', initStars);
+	initStars(); // Initial call for the first page load
+</script>
+
+<style is:global>
+	:root {
+		--accent: 79, 70, 229;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+	}
+	html {
+		font-family: 'Roboto', system-ui, sans-serif;
+		background-size: 224px;
+	}
+	#stars-container {
+		overflow: hidden;
+	}
+	.star {
+		position: absolute;
+		width: 2px;
+		height: 2px;
+		background-color: white;
+		border-radius: 50%;
+		opacity: 0;
+		animation: twinkle linear infinite;
+	}
+	@keyframes twinkle {
+		0%, 100% { opacity: 0; }
+		50% { opacity: 1; }
+	}
+</style>

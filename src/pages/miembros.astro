@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const miembros = [
+	{ nombre: "Ana García", rol: "Presidenta" },
+	{ nombre: "Carlos Rodríguez", rol: "Vicepresidente" },
+	{ nombre: "María López", rol: "Secretaria" },
+	{ nombre: "Juan Martínez", rol: "Tesorero" },
+	{ nombre: "Laura Sánchez", rol: "Coordinadora de Proyectos" },
+];
+---
+
+<Layout title="Miembros - Club de Ciencias San Juan">
+	<h1 class="text-4xl font-bold text-center mb-8">Nuestros Miembros</h1>
+	<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+		{miembros.map((miembro) => (
+			<div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
+				<h2 class="text-xl font-bold mb-2">{miembro.nombre}</h2>
+				<p class="text-gray-600 dark:text-gray-400">{miembro.rol}</p>
+			</div>
+		))}
+	</div>
+</Layout>
