@@ -1,0 +1,31 @@
+<div class="fixed top-0 left-0 right-0 p4 z-10">
+    <div class="flex w-full justify-center">
+        <header class="header max-w-4xl mx-4 bg-gray-600 bg-opacity-25 backdrop-blur-xl text-white px-4 py-2 my-4 rounded-2xl shadow-xl">
+            <nav class="container mx-auto">
+                <ul class="flex justify-center space-x-6">
+                    <li><a href="/" class="hover:text-gray-300 transition-colors">Inicio</a></li>
+                    <li><a href="/blog" class="hover:text-gray-300 transition-colors">Blog</a></li>
+                    <li><a href="/proyectos" class="hover:text-gray-300 transition-colors">Proyectos</a></li>
+                    <li><a href="/sobre-nosotros" class="hover:text-gray-300 transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="/contacto" class="hover:text-gray-300 transition-colors">Contacto</a></li>
+                    <li><a href="/miembros" class="hover:text-gray-300 transition-colors">Miembros</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+</div>
+
+<style>
+    @keyframes scrollHeader {
+        0% {
+            @apply bg-gray-600/0 pt-0 shadow-none;
+        }
+        100% {
+            @apply bg-gray-600/25 pt-2 shadow-xl;
+        }
+    }
+    .header {
+        animation: scrollHeader ease-in-out both;
+        animation-timeline: scroll();
+    }
+</style>

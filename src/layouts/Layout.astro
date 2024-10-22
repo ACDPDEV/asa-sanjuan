@@ -1,4 +1,6 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { ViewTransitions } from 'astro:transitions';
 interface Props {
 	title: string;
@@ -21,26 +23,11 @@ const { title } = Astro.props;
 	</head>
 	<body class="bg-space-light dark:bg-space-dark text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
 		<div id="stars-container" class="fixed inset-0 pointer-events-none"></div>
-		<header class="fixed top-0 left-0 right-0 bg-space-accent text-white p-4 z-10">
-			<nav class="container mx-auto">
-				<ul class="flex justify-center space-x-6">
-					<li><a href="/" class="hover:text-gray-300 transition-colors">Inicio</a></li>
-					<li><a href="/blog" class="hover:text-gray-300 transition-colors">Blog</a></li>
-					<li><a href="/proyectos" class="hover:text-gray-300 transition-colors">Proyectos</a></li>
-					<li><a href="/sobre-nosotros" class="hover:text-gray-300 transition-colors">Sobre Nosotros</a></li>
-					<li><a href="/contacto" class="hover:text-gray-300 transition-colors">Contacto</a></li>
-					<li><a href="/miembros" class="hover:text-gray-300 transition-colors">Miembros</a></li>
-				</ul>
-			</nav>
-		</header>
+		<Header />
 		<main class="flex-grow container mx-auto px-4 py-8 mt-16">
 			<slot />
 		</main>
-		<footer class="bg-space-accent text-white p-4 mt-8">
-			<div class="container mx-auto text-center">
-				<p>&copy; 2023 Club de Ciencias San Juan. Todos los derechos reservados.</p>
-			</div>
-		</footer>
+		<Footer />
 		<button id="darkModeToggle" class="fixed bottom-4 right-4 bg-space-accent text-white p-2 rounded-full z-20">
 			🌓
 		</button>
